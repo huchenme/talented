@@ -14,10 +14,18 @@
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
+    <script type="text/javascript" src="//use.typekit.net/nye8wqg.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
