@@ -1,0 +1,21 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+
+development:
+  <<: *common
+  database: talentedio_development
+
+test:
+  <<: *common
+  database: talentedio_test
+
+staging:
+  <<: *common
+  database: talentedio_staging
+
+production:
+  <<: *common
+  database: talentedio_production
