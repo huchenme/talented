@@ -4,3 +4,29 @@
     @include box-shadow(none);
   }
 }
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.fade {
+  @include opacity(0);
+  @include transition(opacity 0.15s linear);
+  &.in {
+    @include opacity(1);
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #FFF;
+}
+
+.inline-block {
+  @include inline-block;
+}

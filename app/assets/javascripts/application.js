@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require transition
+//= require tab
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

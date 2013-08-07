@@ -12,13 +12,14 @@
   	<title><%= content_for?(:title) ? yield(:title) : "Talented - Your developer match maker." %></title>
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= javascript_include_tag "application" %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tags %>
     <script type="text/javascript" src="//use.typekit.net/nye8wqg.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'layouts/header' %>
     <div class="row">
       <div class="large-12 columns">
@@ -26,6 +27,5 @@
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
   </body>
 </html>

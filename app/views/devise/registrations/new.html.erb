@@ -1,21 +1,48 @@
-<div class="row">
+<div class="row auth">
   <div class="large-6 large-centered columns">
-    <h2>Sign up</h2>
+    <h1 class="header">Sign up</h1>
 
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-      <%= f.error_notification %>
+    <ul class="nav nav-tabs button-group round even-2" id="sign_up_type">
+      <li class="<%= 'active' unless params[:type]=='employer' %>"><a href="#developer" class="button secondary" data-toggle="tab">I’m a developer</a></li>
+      <li class="<%= 'active' if params[:type]=='employer' %>"><a href="#employer" class="button secondary" data-toggle="tab">I’m looking to hire</a></li>
+    </ul>
 
-      <div class="form-inputs">
-        <%= f.input :email, :required => true, :autofocus => true %>
-        <%= f.input :password, :required => true %>
-        <%= f.input :password_confirmation, :required => true %>
+    <div class="tab-content panel">
+      <div class="tab-pane fade <%= 'active in' unless params[:type]=='employer' %>" id="developer">
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :email, :required => true, :autofocus => true %>
+            <%= f.input :password, :required => true %>
+            <%= f.input :password_confirmation, :required => true %>
+            <%= f.hidden_field :type, :value => "developer" %>
+          </div>
+          <hr>
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class: "submit" %>
+          </div>
+        <% end %>
       </div>
+      <div class="tab-pane fade <%= 'active in' if params[:type]=='employer' %>" id="employer">
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Sign up" %>
+          <div class="form-inputs">
+            <%= f.input :email, :required => true, label: "Company email", :autofocus => true %>
+            <%= f.input :password, :required => true %>
+            <%= f.input :password_confirmation, :required => true %>
+            <%= f.hidden_field :type, :value => "employer" %>
+          </div>
+          <hr>
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class: "submit" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-
-    <%= link_to "Sign in", new_session_path(resource_name) %>
+    </div>
+    <div class="other_info">
+      <%= link_to "Sign in", new_session_path(resource_name) %>
+    </div>
   </div>
 </div>
