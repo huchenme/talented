@@ -29,6 +29,42 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE rails_admin_histories (
+    id integer NOT NULL,
+    message text,
+    username character varying(255),
+    item integer,
+    "table" character varying(255),
+    month smallint,
+    year bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: rails_admin_histories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rails_admin_histories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rails_admin_histories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rails_admin_histories_id_seq OWNED BY rails_admin_histories.id;
+
+
+--
 -- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -124,6 +160,13 @@ CREATE TABLE users_roles (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rails_admin_histories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
 
 
@@ -132,6 +175,14 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: rails_admin_histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rails_admin_histories
+    ADD CONSTRAINT rails_admin_histories_pkey PRIMARY KEY (id);
 
 
 --
@@ -148,6 +199,13 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_rails_admin_histories; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rails_admin_histories ON rails_admin_histories USING btree (item, "table", month, year);
 
 
 --
@@ -199,3 +257,5 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 INSERT INTO schema_migrations (version) VALUES ('20130804064831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130807042508');
+
+INSERT INTO schema_migrations (version) VALUES ('20130807094455');
