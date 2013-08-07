@@ -8,6 +8,8 @@ gem 'pg'
 gem 'thin'
 # authentication
 gem 'devise'
+gem 'cancan'
+gem 'rolify'
 
 gem 'simple_form'
 
@@ -25,6 +27,9 @@ group :development do
   gem 'letter_opener'
   gem 'bullet'
   gem 'quiet_assets'
+  gem "better_errors"
+  # gem "binding_of_caller"
+  gem 'meta_request'
 end
 
 group :development, :test do

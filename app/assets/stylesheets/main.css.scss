@@ -1,3 +1,14 @@
-// Place all the styles related to the main controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.welcome {
+  margin: 4em;
+  text-align: center;
+  h2 {
+    margin-bottom: 1em;
+    padding: 0 2em;
+    color: #08c;
+    font-size: 45px;
+  }
+  p {
+    margin-bottom: 3em;
+    font-size: 1.7em;
+  }
+}

@@ -1,0 +1,6 @@
+.button {
+  &.flat {
+    border: none;
+    @include box-shadow(none);
+  }
+}
