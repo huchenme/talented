@@ -30,3 +30,7 @@ hr {
 .inline-block {
   @include inline-block;
 }
+
+.error input, .error textarea, .error select {
+  margin-bottom: 1em;
+}
