@@ -1,15 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 
 # use PostgresSQL for Database
 gem 'pg'
 # use thin server
 gem 'thin'
 # authentication
-gem 'devise'
-gem 'cancan'
-gem 'rolify'
+gem "sorcery"
 
 gem 'simple_form'
 
@@ -28,7 +26,7 @@ group :development do
   gem 'bullet'
   gem 'quiet_assets'
   gem "better_errors"
-  # gem "binding_of_caller"
+  gem "binding_of_caller"
   gem 'meta_request'
 end
 

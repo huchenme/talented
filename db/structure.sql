@@ -65,39 +65,6 @@ ALTER SEQUENCE rails_admin_histories_id_seq OWNED BY rails_admin_histories.id;
 
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE roles (
-    id integer NOT NULL,
-    name character varying(255),
-    resource_id integer,
-    resource_type character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE roles_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
-
-
---
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -112,18 +79,20 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE users (
     id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
+    email character varying(255) NOT NULL,
+    crypted_password character varying(255),
+    salt character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    remember_me_token character varying(255) DEFAULT NULL::character varying,
+    remember_me_token_expires_at timestamp without time zone,
+    reset_password_token character varying(255) DEFAULT NULL::character varying,
+    reset_password_token_expires_at timestamp without time zone,
+    reset_password_email_sent_at timestamp without time zone,
+    last_login_at timestamp without time zone,
+    last_logout_at timestamp without time zone,
+    last_activity_at timestamp without time zone,
+    last_login_from_ip_address character varying(255) DEFAULT NULL::character varying
 );
 
 
@@ -147,27 +116,10 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: users_roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE users_roles (
-    user_id integer,
-    role_id integer
-);
-
-
---
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rails_admin_histories_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
 
 
 --
@@ -186,14 +138,6 @@ ALTER TABLE ONLY rails_admin_histories
 
 
 --
--- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY roles
-    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
-
-
---
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -209,38 +153,24 @@ CREATE INDEX index_rails_admin_histories ON rails_admin_histories USING btree (i
 
 
 --
--- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_last_logout_at_and_last_activity_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_roles_on_name ON roles USING btree (name);
-
-
---
--- Name: index_roles_on_name_and_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_roles_on_name_and_resource_type_and_resource_id ON roles USING btree (name, resource_type, resource_id);
+CREATE INDEX index_users_on_last_logout_at_and_last_activity_at ON users USING btree (last_logout_at, last_activity_at);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_remember_me_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE INDEX index_users_on_remember_me_token ON users USING btree (remember_me_token);
 
 
 --
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
-
-
---
--- Name: index_users_roles_on_user_id_and_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USING btree (user_id, role_id);
+CREATE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
@@ -254,8 +184,20 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
+SET search_path TO "$user",public;
+
 INSERT INTO schema_migrations (version) VALUES ('20130804064831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130807042508');
 
 INSERT INTO schema_migrations (version) VALUES ('20130807094455');
+
+INSERT INTO schema_migrations (version) VALUES ('20130810114628');
+
+INSERT INTO schema_migrations (version) VALUES ('20130810120439');
+
+INSERT INTO schema_migrations (version) VALUES ('20130810120440');
+
+INSERT INTO schema_migrations (version) VALUES ('20130810120441');
+
+INSERT INTO schema_migrations (version) VALUES ('20130810130503');

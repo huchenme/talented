@@ -9,16 +9,16 @@
 
   <section class="top-bar-section">
     <ul class="right">
-      <%- if user_signed_in? -%>
+      <%- if current_user -%>
         <li class="divider"></li>
-        <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+        <li><%= link_to 'Edit account', settings_path %></li>
         <li class="divider"></li>
-        <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+        <li><%= link_to 'Sign out', logout_path, :method => :delete %></li>
       <%- else -%>
         <li class="divider"></li>
-        <li><%= link_to "Sign in", new_user_session_path %></li>
+        <li><%= link_to "Sign in", login_path %></li>
         <li class="divider"></li>
-        <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <li><%= link_to "Sign up", signup_path %></li>
       <%- end -%>
     </ul>
   </section>
