@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
   def create
     if @user = login(params[:session][:email],params[:session][:password],params[:session][:remember])
       flash[:success] = 'Login successful.'
-      redirect_back_or_to root_path
+      redirect_back_or_to profile_path
     else
       flash.now[:alert] = "Wrong email or password."
       render :new

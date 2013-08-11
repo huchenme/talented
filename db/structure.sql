@@ -29,6 +29,71 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: developers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE developers (
+    id integer NOT NULL,
+    relocate boolean,
+    "position" character varying(255),
+    location character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: developers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE developers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: developers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE developers_id_seq OWNED BY developers.id;
+
+
+--
+-- Name: employers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employers (
+    id integer NOT NULL,
+    company_name character varying(255),
+    website character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: employers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE employers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: employers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE employers_id_seq OWNED BY employers.id;
+
+
+--
 -- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -92,7 +157,11 @@ CREATE TABLE users (
     last_login_at timestamp without time zone,
     last_logout_at timestamp without time zone,
     last_activity_at timestamp without time zone,
-    last_login_from_ip_address character varying(255) DEFAULT NULL::character varying
+    last_login_from_ip_address character varying(255) DEFAULT NULL::character varying,
+    profile_id integer,
+    profile_type character varying(255),
+    firstname character varying(255),
+    lastname character varying(255)
 );
 
 
@@ -119,6 +188,20 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY developers ALTER COLUMN id SET DEFAULT nextval('developers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY employers ALTER COLUMN id SET DEFAULT nextval('employers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rails_admin_histories_id_seq'::regclass);
 
 
@@ -127,6 +210,22 @@ ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rail
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY developers
+    ADD CONSTRAINT developers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employers
+    ADD CONSTRAINT employers_pkey PRIMARY KEY (id);
 
 
 --
@@ -157,6 +256,13 @@ CREATE INDEX index_rails_admin_histories ON rails_admin_histories USING btree (i
 --
 
 CREATE INDEX index_users_on_last_logout_at_and_last_activity_at ON users USING btree (last_logout_at, last_activity_at);
+
+
+--
+-- Name: index_users_on_profile_id_and_profile_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_profile_id_and_profile_type ON users USING btree (profile_id, profile_type);
 
 
 --
@@ -201,3 +307,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130810120440');
 INSERT INTO schema_migrations (version) VALUES ('20130810120441');
 
 INSERT INTO schema_migrations (version) VALUES ('20130810130503');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811053420');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811055734');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811055751');

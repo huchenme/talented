@@ -11,7 +11,11 @@
     <ul class="right">
       <%- if current_user -%>
         <li class="divider"></li>
-        <li><%= link_to 'Edit account', settings_path %></li>
+        <li><%= link_to 'See profile', profile_path %></li>
+        <li class="divider"></li>
+        <li><%= link_to 'Edit Profile', edit_profile_path %></li>
+        <li class="divider"></li>
+        <li><%= link_to 'Setting', settings_path %></li>
         <li class="divider"></li>
         <li><%= link_to 'Sign out', logout_path, :method => :delete %></li>
       <%- else -%>

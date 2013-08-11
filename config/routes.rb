@@ -10,6 +10,8 @@ Talentedio::Application.routes.draw do
   put 'settings' => 'users#update'
   delete 'account/delete' => 'users#destroy', :as => 'delete_account'
 
+  resource :profile, only: [:show, :edit, :update]
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root :to => 'main#home'
