@@ -10,6 +10,7 @@ gem 'thin'
 gem "sorcery"
 
 gem 'simple_form'
+gem 'rails_autolink'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

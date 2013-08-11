@@ -184,6 +184,8 @@ GEM
       remotipart (~> 1.0)
       safe_yaml (~> 0.6)
       sass-rails (~> 3.1)
+    rails_autolink (1.1.0)
+      rails (> 3.1)
     railties (3.2.14)
       actionpack (= 3.2.14)
       activesupport (= 3.2.14)
@@ -277,6 +279,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.14)
   rails_admin
+  rails_autolink
   rspec-rails
   ruby_gntp
   sass-rails (~> 3.2.3)

@@ -29,6 +29,99 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: availabilities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE availabilities (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: availabilities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE availabilities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: availabilities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE availabilities_id_seq OWNED BY availabilities.id;
+
+
+--
+-- Name: business_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE business_types (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: business_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE business_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: business_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE business_types_id_seq OWNED BY business_types.id;
+
+
+--
+-- Name: compensations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE compensations (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: compensations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE compensations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: compensations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE compensations_id_seq OWNED BY compensations.id;
+
+
+--
 -- Name: developers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -94,6 +187,37 @@ ALTER SEQUENCE employers_id_seq OWNED BY employers.id;
 
 
 --
+-- Name: position_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE position_types (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: position_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE position_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: position_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE position_types_id_seq OWNED BY position_types.id;
+
+
+--
 -- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -136,6 +260,68 @@ ALTER SEQUENCE rails_admin_histories_id_seq OWNED BY rails_admin_histories.id;
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
+
+
+--
+-- Name: team_sizes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE team_sizes (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: team_sizes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE team_sizes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: team_sizes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE team_sizes_id_seq OWNED BY team_sizes.id;
+
+
+--
+-- Name: tech_skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tech_skills (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tech_skills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tech_skills_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tech_skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tech_skills_id_seq OWNED BY tech_skills.id;
 
 
 --
@@ -188,6 +374,27 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY availabilities ALTER COLUMN id SET DEFAULT nextval('availabilities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY business_types ALTER COLUMN id SET DEFAULT nextval('business_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY compensations ALTER COLUMN id SET DEFAULT nextval('compensations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY developers ALTER COLUMN id SET DEFAULT nextval('developers_id_seq'::regclass);
 
 
@@ -202,6 +409,13 @@ ALTER TABLE ONLY employers ALTER COLUMN id SET DEFAULT nextval('employers_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY position_types ALTER COLUMN id SET DEFAULT nextval('position_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rails_admin_histories_id_seq'::regclass);
 
 
@@ -209,7 +423,45 @@ ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rail
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY team_sizes ALTER COLUMN id SET DEFAULT nextval('team_sizes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tech_skills ALTER COLUMN id SET DEFAULT nextval('tech_skills_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: availabilities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY availabilities
+    ADD CONSTRAINT availabilities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: business_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY business_types
+    ADD CONSTRAINT business_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: compensations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY compensations
+    ADD CONSTRAINT compensations_pkey PRIMARY KEY (id);
 
 
 --
@@ -229,11 +481,35 @@ ALTER TABLE ONLY employers
 
 
 --
+-- Name: position_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY position_types
+    ADD CONSTRAINT position_types_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: rails_admin_histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY rails_admin_histories
     ADD CONSTRAINT rails_admin_histories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: team_sizes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY team_sizes
+    ADD CONSTRAINT team_sizes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tech_skills_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tech_skills
+    ADD CONSTRAINT tech_skills_pkey PRIMARY KEY (id);
 
 
 --
@@ -313,3 +589,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130811053420');
 INSERT INTO schema_migrations (version) VALUES ('20130811055734');
 
 INSERT INTO schema_migrations (version) VALUES ('20130811055751');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811105936');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811105952');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811110012');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811110058');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811110113');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811110228');
