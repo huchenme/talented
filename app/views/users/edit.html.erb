@@ -4,11 +4,7 @@
 
     <div class="panel">
       <%= simple_form_for(@user, :url => settings_path, html: {class:"custom", :method => :put}) do |f| %>
-        <div class="form-inputs">
-          <%= f.input :email, :required => true, :autofocus => true %>
-          <%= f.input :password, :required => false %>
-          <%= f.input :password_confirmation, :required => false %>
-        </div>
+        <%= render 'form_inputs', f: f %>
         <hr>
         <div class="form-actions">
           <%= f.button :submit, "Update" %>

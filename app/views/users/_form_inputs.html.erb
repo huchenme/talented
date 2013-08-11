@@ -1,0 +1,13 @@
+<div class="form-inputs">
+  <div class="row">
+    <div class="large-6 columns">
+      <%= f.input :firstname, label: "First name", :autofocus => true %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.input :lastname, label: "Last name" %>
+    </div>
+  </div>
+  <%= f.input :email, :required => true %>
+  <%= f.input :password, :required => true %>
+  <%= f.input :password_confirmation, :required => true %>
+</div>
