@@ -29,10 +29,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: developer_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: developers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE developer_profiles (
+CREATE TABLE developers (
     id integer NOT NULL,
     relocate boolean,
     "position" character varying(255),
@@ -43,10 +43,10 @@ CREATE TABLE developer_profiles (
 
 
 --
--- Name: developer_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: developers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE developer_profiles_id_seq
+CREATE SEQUENCE developers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -55,17 +55,17 @@ CREATE SEQUENCE developer_profiles_id_seq
 
 
 --
--- Name: developer_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: developers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE developer_profiles_id_seq OWNED BY developer_profiles.id;
+ALTER SEQUENCE developers_id_seq OWNED BY developers.id;
 
 
 --
--- Name: employer_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: employers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE employer_profiles (
+CREATE TABLE employers (
     id integer NOT NULL,
     company_name character varying(255),
     website character varying(255),
@@ -75,10 +75,10 @@ CREATE TABLE employer_profiles (
 
 
 --
--- Name: employer_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: employers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE employer_profiles_id_seq
+CREATE SEQUENCE employers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -87,10 +87,10 @@ CREATE SEQUENCE employer_profiles_id_seq
 
 
 --
--- Name: employer_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: employers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE employer_profiles_id_seq OWNED BY employer_profiles.id;
+ALTER SEQUENCE employers_id_seq OWNED BY employers.id;
 
 
 --
@@ -188,14 +188,14 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY developer_profiles ALTER COLUMN id SET DEFAULT nextval('developer_profiles_id_seq'::regclass);
+ALTER TABLE ONLY developers ALTER COLUMN id SET DEFAULT nextval('developers_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY employer_profiles ALTER COLUMN id SET DEFAULT nextval('employer_profiles_id_seq'::regclass);
+ALTER TABLE ONLY employers ALTER COLUMN id SET DEFAULT nextval('employers_id_seq'::regclass);
 
 
 --
@@ -213,19 +213,19 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: developer_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY developer_profiles
-    ADD CONSTRAINT developer_profiles_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY developers
+    ADD CONSTRAINT developers_pkey PRIMARY KEY (id);
 
 
 --
--- Name: employer_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: employers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY employer_profiles
-    ADD CONSTRAINT employer_profiles_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY employers
+    ADD CONSTRAINT employers_pkey PRIMARY KEY (id);
 
 
 --
@@ -308,8 +308,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130810120441');
 
 INSERT INTO schema_migrations (version) VALUES ('20130810130503');
 
-INSERT INTO schema_migrations (version) VALUES ('20130811052917');
-
-INSERT INTO schema_migrations (version) VALUES ('20130811053110');
-
 INSERT INTO schema_migrations (version) VALUES ('20130811053420');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811055734');
+
+INSERT INTO schema_migrations (version) VALUES ('20130811055751');

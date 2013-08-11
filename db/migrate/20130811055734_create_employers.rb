@@ -1,6 +1,6 @@
-class CreateEmployerProfiles < ActiveRecord::Migration
+class CreateEmployers < ActiveRecord::Migration
   def change
-    create_table :employer_profiles do |t|
+    create_table :employers do |t|
       t.string :company_name
       t.string :website
 

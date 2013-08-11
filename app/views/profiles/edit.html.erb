@@ -1,0 +1,5 @@
+<% if @profile.class.name == "Developer" %>
+  <%= render 'profiles/edit/developer' %>
+<% elsif @profile.class.name == "Employer" %>
+  <%= render 'profiles/edit/employer' %>
+<% end %>

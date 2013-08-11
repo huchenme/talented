@@ -1,6 +1,6 @@
-class CreateDeveloperProfiles < ActiveRecord::Migration
+class CreateDevelopers < ActiveRecord::Migration
   def change
-    create_table :developer_profiles do |t|
+    create_table :developers do |t|
       t.boolean :relocate
       t.string :position
       t.string :location

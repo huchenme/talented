@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: developer_profiles
+# Table name: developers
 #
 #  id         :integer          not null, primary key
 #  relocate   :boolean
@@ -12,6 +12,6 @@
 
 require 'spec_helper'
 
-describe DeveloperProfile do
+describe Developer do
   pending "add some examples to (or delete) #{__FILE__}"
 end

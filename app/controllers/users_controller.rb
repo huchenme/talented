@@ -7,17 +7,17 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @developer = User.new
+    @employer = User.new
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      login(params[:user][:email],params[:user][:password],params[:user][:remember])
-      flash[:success] = 'Registration successful.'
-      redirect_to root_path
+    if params[:type] == 'developer'
+      create_developer
+    elsif params[:type] == 'employer'
+      create_employer
     else
-      render :new
+      redirect_to signup_path, alert: "Currently we don't support the user type at the moment."
     end
   end
 
@@ -42,5 +42,37 @@ class UsersController < ApplicationController
 
   def correct_user
     @user ||= current_user
+  end
+
+  def create_developer
+    @developer = User.new(params[:user])
+    @employer = User.new
+    if @developer.save
+      profile = Developer.new
+      profile.save(validate: false)
+      @developer.update_attribute(:profile, profile)
+      user_params = params[:user]
+      login(user_params[:email],user_params[:password],true)
+      flash[:success] = 'Registration successful.'
+      redirect_to profile_path
+    else
+      render :new
+    end
+  end
+
+  def create_employer
+    @employer = User.new(params[:user])
+    @developer = User.new
+    if @employer.save
+      profile = Employer.new
+      profile.save(validate: false)
+      @employer.update_attribute(:profile, profile)
+      user_params = params[:user]
+      login(user_params[:email],user_params[:password],true)
+      flash[:success] = 'Registration successful.'
+      redirect_to profile_path
+    else
+      render :new
+    end
   end
 end

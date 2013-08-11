@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: developer_profiles
+# Table name: developers
 #
 #  id         :integer          not null, primary key
 #  relocate   :boolean
@@ -10,6 +10,10 @@
 #  updated_at :datetime         not null
 #
 
-class DeveloperProfile < ActiveRecord::Base
+class Developer < ActiveRecord::Base
   attr_accessible :location, :position, :relocate
+
+  has_one :user, as: :profile, dependent: :destroy
+
+  validates_presence_of :location, :position
 end

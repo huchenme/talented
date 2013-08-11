@@ -9,8 +9,20 @@
 
     <div class="tab-content panel">
       <div class="tab-pane fade <%= 'active in' unless params[:type]=='employer' %>" id="developer">
-        <%= simple_form_for(@user, :url => signup_path) do |f| %>
-        <%= render 'form_inputs', f: f %>
+        <%= simple_form_for(@developer, :url => signup_path(type: 'developer')) do |f| %>
+          <div class="form-inputs">
+            <div class="row">
+              <div class="large-6 columns">
+                <%= f.input :firstname, label: "First name", :autofocus => true %>
+              </div>
+              <div class="large-6 columns">
+                <%= f.input :lastname, label: "Last name" %>
+              </div>
+            </div>
+            <%= f.input :email, :required => true %>
+            <%= f.input :password, :required => true %>
+            <%= f.input :password_confirmation, :required => true %>
+          </div>
           <hr>
           <div class="form-actions">
             <%= f.button :submit, "Sign up", class: "submit" %>
@@ -18,8 +30,22 @@
         <% end %>
       </div>
       <div class="tab-pane fade <%= 'active in' if params[:type]=='employer' %>" id="employer">
-        <%= simple_form_for(@user, :url => signup_path) do |f| %>
-          <%= render 'form_inputs', f: f %>
+        <%= simple_form_for(@employer, :url => signup_path(type: 'employer')) do |f| %>
+
+          <div class="form-inputs">
+            <div class="row">
+              <div class="large-6 columns">
+                <%= f.input :firstname, label: "First name", :autofocus => true %>
+              </div>
+              <div class="large-6 columns">
+                <%= f.input :lastname, label: "Last name" %>
+              </div>
+            </div>
+            <%= f.input :email, :required => true %>
+            <%= f.input :password, :required => true %>
+            <%= f.input :password_confirmation, :required => true %>
+          </div>
+          <%= hidden_field_tag :user_type, "employer" %>
           <hr>
           <div class="form-actions">
             <%= f.button :submit, "Sign up", class: "submit" %>

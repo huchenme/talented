@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: employer_profiles
+# Table name: employers
 #
 #  id           :integer          not null, primary key
 #  company_name :string(255)
@@ -11,6 +11,6 @@
 
 require 'spec_helper'
 
-describe EmployerProfile do
+describe Employer do
   pending "add some examples to (or delete) #{__FILE__}"
 end

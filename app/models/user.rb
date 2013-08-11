@@ -26,6 +26,8 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  belongs_to :profile, polymorphic: true
+
   attr_accessible :email, :password, :password_confirmation, :firstname, :lastname
 
   validates :firstname, presence: true

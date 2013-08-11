@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: employer_profiles
+# Table name: employers
 #
 #  id           :integer          not null, primary key
 #  company_name :string(255)
@@ -9,6 +9,12 @@
 #  updated_at   :datetime         not null
 #
 
-class EmployerProfile < ActiveRecord::Base
+class Employer < ActiveRecord::Base
   attr_accessible :company_name, :website
+
+  has_one :user, as: :profile, dependent: :destroy
+
+  accepts_nested_attributes_for :user
+
+  validates_presence_of :company_name
 end
