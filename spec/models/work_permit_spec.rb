@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: position_types
+# Table name: work_permits
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -10,6 +10,6 @@
 
 require 'spec_helper'
 
-describe PositionType do
+describe WorkPermit do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -2,12 +2,19 @@
 #
 # Table name: developers
 #
-#  id         :integer          not null, primary key
-#  relocate   :boolean
-#  position   :string(255)
-#  location   :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  relocate        :boolean
+#  position        :string(255)
+#  location        :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  company         :string(255)
+#  work_permit_id  :integer
+#  compensation_id :integer
+#  availablity_id  :integer
+#  goal            :text
+#  linkedin        :string(255)
+#  github          :string(255)
 #
 
 require 'spec_helper'

@@ -74,3 +74,11 @@ end
 ].each do |availability|
   Availability.find_or_create_by_name(name: availability)
 end
+
+[
+  "Yes, resident",
+  "Yes, authorized to work",
+  "No"
+].each do |permit|
+  WorkPermit.find_or_create_by_name(name: permit)
+end

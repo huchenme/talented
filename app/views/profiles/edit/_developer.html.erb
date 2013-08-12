@@ -1,12 +1,49 @@
-<h1>Edit Developer</h1>
+<%= simple_form_for(@profile, as: 'profile', url: profile_path) do |f| %>
+  <section>
+    <h3>Personal Information</h3>
+    <hr>
+    <div class="row">
+      <div class="large-4 columns">
+        <%= f.input :company, label: "Current Employment" %>
+      </div>
+      <div class="large-4 columns">
+        <%= f.input :position, label: "Current Position" %>
+      </div>
+      <div class="large-4 columns">
+        <%= f.input :location, label: "Current Location" %>
+      </div>
+    </div>
+    <%= f.association :work_permit, as: :radio_buttons %>
+    <%= f.input :relocate, as: :radio_buttons %>
+  </section>
 
-<%= simple_form_for(@profile, as: 'profile', url: profile_path, html: {class:"custom"}) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :relocate %>
-    <%= f.input :position %>
-    <%= f.input :location %>
-  </div>
+  <section>
+    <h3>Job Search Information</h3>
+    <hr>
+    <%= f.association :compensation, label: "How much would you like to make this year?", as: :radio_buttons %>
+    <%= f.association :team_sizes, label: "What size team do you want?", as: :check_boxes %>
+    <%= f.association :business_types, label: "Are there particular fields you want to work in?", as: :check_boxes %>
+    <%= f.association :position_types, label: "What are you interested in?", as: :check_boxes %>
+    <%= f.association :availability, label: "When can you start working?", as: :radio_buttons %>
+  </section>
+
+  <section>
+    <h3>And One Last Thing.</h3>
+    <hr>
+    <%= f.input :goal, label: "What are your goals and aspirations?" %>
+    <%= f.association :tech_skills, label: "What do you speak?", as: :check_boxes %>
+    <div class="row">
+      <div class="large-6 columns">
+        <%= f.input :linkedin, label: "LinkedIn link" %>
+      </div>
+      <div class="large-6 columns">
+        <%= f.input :github, label: "GitHub ID" %>
+      </div>
+    </div>
+  </section>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "Save Profile", class: "large flat radius" %>
   </div>
+
 <% end %>

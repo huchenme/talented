@@ -31,6 +31,32 @@ hr {
   @include inline-block;
 }
 
+.error small.error {
+  margin-top: 0;
+}
+
+form label.control-label {
+  font-weight: 600;
+  font-size: emCalc(16);
+  margin-bottom: emCalc(8);
+}
+
+form.custom span.custom {
+  &.checkbox, &.radio {
+    margin-right: 5px;
+  }
+}
+
+form input {
+  &.check_boxes, &.radio_buttons {
+    margin-right: 5px;
+  }
+}
+
 .error input, .error textarea, .error select {
   margin-bottom: 1em;
+}
+
+form .form-actions {
+  margin-top: 2em;
 }

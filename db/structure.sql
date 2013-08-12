@@ -72,6 +72,16 @@ CREATE TABLE business_types (
 
 
 --
+-- Name: business_types_developers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE business_types_developers (
+    developer_id integer,
+    business_type_id integer
+);
+
+
+--
 -- Name: business_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -131,7 +141,14 @@ CREATE TABLE developers (
     "position" character varying(255),
     location character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    company character varying(255),
+    work_permit_id integer,
+    compensation_id integer,
+    availability_id integer,
+    goal text,
+    linkedin character varying(255),
+    github character varying(255)
 );
 
 
@@ -152,6 +169,36 @@ CREATE SEQUENCE developers_id_seq
 --
 
 ALTER SEQUENCE developers_id_seq OWNED BY developers.id;
+
+
+--
+-- Name: developers_position_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE developers_position_types (
+    developer_id integer,
+    position_type_id integer
+);
+
+
+--
+-- Name: developers_team_sizes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE developers_team_sizes (
+    developer_id integer,
+    team_size_id integer
+);
+
+
+--
+-- Name: developers_tech_skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE developers_tech_skills (
+    developer_id integer,
+    tech_skill_id integer
+);
 
 
 --
@@ -371,6 +418,37 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: work_permits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE work_permits (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: work_permits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE work_permits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: work_permits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE work_permits_id_seq OWNED BY work_permits.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -438,6 +516,13 @@ ALTER TABLE ONLY tech_skills ALTER COLUMN id SET DEFAULT nextval('tech_skills_id
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY work_permits ALTER COLUMN id SET DEFAULT nextval('work_permits_id_seq'::regclass);
 
 
 --
@@ -521,6 +606,63 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: work_permits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY work_permits
+    ADD CONSTRAINT work_permits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: developers_business_types_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX developers_business_types_index ON business_types_developers USING btree (developer_id, business_type_id);
+
+
+--
+-- Name: developers_position_types_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX developers_position_types_index ON developers_position_types USING btree (developer_id, position_type_id);
+
+
+--
+-- Name: developers_team_sizes_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX developers_team_sizes_index ON developers_team_sizes USING btree (developer_id, team_size_id);
+
+
+--
+-- Name: developers_tech_skills_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX developers_tech_skills_index ON developers_tech_skills USING btree (developer_id, tech_skill_id);
+
+
+--
+-- Name: index_developers_on_availablity_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_developers_on_availablity_id ON developers USING btree (availability_id);
+
+
+--
+-- Name: index_developers_on_compensation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_developers_on_compensation_id ON developers USING btree (compensation_id);
+
+
+--
+-- Name: index_developers_on_work_permit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_developers_on_work_permit_id ON developers USING btree (work_permit_id);
+
+
+--
 -- Name: index_rails_admin_histories; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -601,3 +743,11 @@ INSERT INTO schema_migrations (version) VALUES ('20130811110058');
 INSERT INTO schema_migrations (version) VALUES ('20130811110113');
 
 INSERT INTO schema_migrations (version) VALUES ('20130811110228');
+
+INSERT INTO schema_migrations (version) VALUES ('20130812135938');
+
+INSERT INTO schema_migrations (version) VALUES ('20130812141440');
+
+INSERT INTO schema_migrations (version) VALUES ('20130812162305');
+
+INSERT INTO schema_migrations (version) VALUES ('20130812163140');

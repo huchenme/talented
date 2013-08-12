@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: position_types
+# Table name: work_permits
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -8,8 +8,6 @@
 #  updated_at :datetime         not null
 #
 
-require 'spec_helper'
-
-describe PositionType do
-  pending "add some examples to (or delete) #{__FILE__}"
+class WorkPermit < ActiveRecord::Base
+  attr_accessible :name
 end

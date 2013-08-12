@@ -74,7 +74,7 @@ $body-font-family: "proxima-nova", "Helvetica Neue", "Helvetica", Helvetica, Ari
 
 // Make sure border radius matches unless we want it different.
 
-// $global-radius: 3px;
+$global-radius: 5px;
 // $global-rounded: 1000px;
 
 // Inset shadow shiny edges and depressions.
@@ -284,7 +284,7 @@ $anchor-font-color-hover: darken($anchor-font-color, 5%);
 
 // $form-label-pointer: pointer;
 // $form-label-font-size: emCalc(14);
-// $form-label-font-weight: 500;
+// $form-label-font-weight: 600;
 // $form-label-font-color: lighten(#000, 30%);
 // $form-label-bottom-margin: emCalc(3);
 // $input-font-family: inherit;
@@ -596,7 +596,7 @@ $anchor-font-color-hover: darken($anchor-font-color, 5%);
 // $custom-form-bg-disabled: #ddd;
 // $custom-form-input-size: 16px;
 // $custom-form-check-color: #222;
-// $custom-form-check-size: 16px;
+$custom-form-check-size: 21px;
 // $custom-form-radio-size: 8px;
 // $custom-form-checkbox-radius: 0px;
 
