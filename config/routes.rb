@@ -11,6 +11,7 @@ Talentedio::Application.routes.draw do
   delete 'account/delete' => 'users#destroy', :as => 'delete_account'
 
   resource :profile, only: [:show, :edit, :update]
+  resources :jobs
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 

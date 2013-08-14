@@ -35,4 +35,12 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: {with: VALID_EMAIL_REGEX}
+
+  def developer?
+    profile.class.name == "Developer"
+  end
+
+  def employer?
+    profile.class.name == "Employer"
+  end
 end

@@ -1,0 +1,16 @@
+<%= simple_form_for(@job) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :responsibility %>
+    <%= f.input :requirement %>
+    <%= f.association :tech_skills, as: :check_boxes %>
+    <%= f.association :compensation, as: :radio_buttons %>
+    <%= f.association :position_types, as: :check_boxes %>
+    <%= f.input :ideal_candidate %>
+    <%= f.association :availability, as: :radio_buttons %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

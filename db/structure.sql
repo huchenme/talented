@@ -82,6 +82,16 @@ CREATE TABLE business_types_developers (
 
 
 --
+-- Name: business_types_employers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE business_types_employers (
+    employer_id integer,
+    business_type_id integer
+);
+
+
+--
 -- Name: business_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -210,7 +220,12 @@ CREATE TABLE employers (
     company_name character varying(255),
     website character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    other_contact character varying(255),
+    location character varying(255),
+    description text,
+    vision text,
+    team_size_id integer
 );
 
 
@@ -231,6 +246,64 @@ CREATE SEQUENCE employers_id_seq
 --
 
 ALTER SEQUENCE employers_id_seq OWNED BY employers.id;
+
+
+--
+-- Name: jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE jobs (
+    id integer NOT NULL,
+    employer_id integer,
+    title character varying(255),
+    description text,
+    responsibility text,
+    requirement text,
+    compensation_id integer,
+    ideal_candidate text,
+    availability_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
+
+
+--
+-- Name: jobs_position_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE jobs_position_types (
+    job_id integer,
+    position_type_id integer
+);
+
+
+--
+-- Name: jobs_tech_skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE jobs_tech_skills (
+    job_id integer,
+    tech_skill_id integer
+);
 
 
 --
@@ -487,6 +560,13 @@ ALTER TABLE ONLY employers ALTER COLUMN id SET DEFAULT nextval('employers_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY jobs ALTER COLUMN id SET DEFAULT nextval('jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY position_types ALTER COLUMN id SET DEFAULT nextval('position_types_id_seq'::regclass);
 
 
@@ -566,6 +646,14 @@ ALTER TABLE ONLY employers
 
 
 --
+-- Name: jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY jobs
+    ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: position_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -642,6 +730,13 @@ CREATE INDEX developers_tech_skills_index ON developers_tech_skills USING btree 
 
 
 --
+-- Name: employers_business_types_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX employers_business_types_index ON business_types_employers USING btree (employer_id, business_type_id);
+
+
+--
 -- Name: index_developers_on_availablity_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -660,6 +755,34 @@ CREATE INDEX index_developers_on_compensation_id ON developers USING btree (comp
 --
 
 CREATE INDEX index_developers_on_work_permit_id ON developers USING btree (work_permit_id);
+
+
+--
+-- Name: index_employers_on_team_size_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_employers_on_team_size_id ON employers USING btree (team_size_id);
+
+
+--
+-- Name: index_jobs_on_availability_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_jobs_on_availability_id ON jobs USING btree (availability_id);
+
+
+--
+-- Name: index_jobs_on_compensation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_jobs_on_compensation_id ON jobs USING btree (compensation_id);
+
+
+--
+-- Name: index_jobs_on_employer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_jobs_on_employer_id ON jobs USING btree (employer_id);
 
 
 --
@@ -695,6 +818,20 @@ CREATE INDEX index_users_on_remember_me_token ON users USING btree (remember_me_
 --
 
 CREATE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: jobs_position_types_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX jobs_position_types_index ON jobs_position_types USING btree (job_id, position_type_id);
+
+
+--
+-- Name: jobs_tech_skills_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX jobs_tech_skills_index ON jobs_tech_skills USING btree (job_id, tech_skill_id);
 
 
 --
@@ -751,3 +888,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130812141440');
 INSERT INTO schema_migrations (version) VALUES ('20130812162305');
 
 INSERT INTO schema_migrations (version) VALUES ('20130812163140');
+
+INSERT INTO schema_migrations (version) VALUES ('20130814131213');
+
+INSERT INTO schema_migrations (version) VALUES ('20130814142211');

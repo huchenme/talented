@@ -1,4 +1,17 @@
 <h1>Show Company</h1>
 
-<%= @profile.company_name %>
-<%= auto_link @profile.website %>
+<div>
+  <%= @profile.company_name %>
+  <%= auto_link @profile.website %>
+</div>
+
+<%- @profile.jobs.each do |job| -%>
+<div>
+  <%= job.title %>
+  <%= link_to "edit", edit_job_path(job) %>
+  <%= link_to "delete", job_path(job), method: :delete, conform: "Are you sure?" %>
+</div>
+<%- end -%>
+<div>
+  <%= link_to "New Job Posting", new_job_path, class: "button button-primary" %>
+</div>

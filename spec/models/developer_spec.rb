@@ -11,7 +11,7 @@
 #  company         :string(255)
 #  work_permit_id  :integer
 #  compensation_id :integer
-#  availablity_id  :integer
+#  availability_id :integer
 #  goal            :text
 #  linkedin        :string(255)
 #  github          :string(255)
