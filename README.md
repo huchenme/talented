@@ -25,23 +25,23 @@ brew install postgresql
 
 ### Current progress
 
-- [x] developer, employer signup
-- [x] developer, employer signin
-- [x] developer fields and validations
-- [x] employer fields and validations
-- [x] employer jobs create, view, edit, delete and validations
-- [ ] form styling
-- [ ] developer, employer profile page styling
-- [ ] job form styling
-- [ ] job show page
-- [ ] admin page customization
-- [ ] admin approval for developer and employer
-- [ ] admin authorization
-- [x] heroku development
+- ~~developer, employer signup~~
+- ~~developer, employer signin~~
+- ~~developer fields and validations~~
+- ~~employer fields and validations~~
+- ~~employer jobs create, view, edit, delete and validations~~
+- form styling
+- developer, employer profile page styling
+- job form styling
+- job show page
+- admin page customization
+- admin approval for developer and employer
+- admin authorization
+- ~~heroku development~~
 
 __phase 2__:
 
-- [ ] link with Github
-- [ ] link with Linkedin
-- [ ] pull information from Github
-- [ ] pull information from Linkedin
+- link with Github
+- link with Linkedin
+- pull information from Github
+- pull information from Linkedin
