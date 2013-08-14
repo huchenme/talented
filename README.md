@@ -6,8 +6,7 @@
 git clone git@github.com:huchenme/talented.git
 cd talented
 bundle install
-rake db:create:all
-rake db:migrate
+rake db:reset
 rails server
 ```
 
