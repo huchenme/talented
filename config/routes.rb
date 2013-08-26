@@ -1,4 +1,7 @@
 Talentedio::Application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   resources :password_resets, path: 'passwords'
 
   get 'login' => 'user_sessions#new'
@@ -12,8 +15,6 @@ Talentedio::Application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
   resources :jobs
-
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root :to => 'main#home'
 end

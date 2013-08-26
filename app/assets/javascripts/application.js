@@ -15,6 +15,6 @@
 //= require foundation
 //= require transition
 //= require tab
-//= require_tree .
+//= require_tree ./application
 
 $(function(){ $(document).foundation(); });

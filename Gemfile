@@ -12,12 +12,18 @@ gem "sorcery"
 gem 'simple_form'
 gem 'rails_autolink'
 
+# active admin
+gem 'activeadmin', github: "gregbell/active_admin"
+gem "meta_search"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'zurb-foundation'
   gem 'bourbon'
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 end
 
 group :development do
@@ -41,6 +47,3 @@ group :development, :test do
   gem "uniform_notifier"
   gem 'ruby_gntp'
 end
-
-gem 'jquery-rails'
-gem 'rails_admin'
